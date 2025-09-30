@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>MATE — Play a Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --turquoise: #14b8a6;
+            --turquoise-light: #2dd4bf;
+            --turquoise-pale: #ccfbf1;
+            --coral: #ff6b6b;
+            --purple: #a78bfa;
+            --bg: #f8fffe;
+            --white: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+            background: linear-gradient(135deg, #f8fffe 0%, #e0f7f4 100%);
+            color: var(--text-dark);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            text-align: center;
+            padding: 2vh 20px 1.5vh;
+        }
+
+        header h1 {
+            font-size: clamp(24px, 3.5vh, 36px);
+            background: linear-gradient(90deg, var(--turquoise), var(--turquoise-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5vh;
+            font-weight: 700;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: clamp(14px, 1.8vh, 18px);
+        }
+
+        .games-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: clamp(12px, 2vh, 20px);
+            padding: 0 clamp(20px, 3vw, 40px) clamp(20px, 2vh, 30px);
+            max-height: calc(100vh - 15vh);
+        }
+
+        .game-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: clamp(16px, 2.5vh, 28px);
+            box-shadow: 0 4px 20px rgba(20, 184, 166, 0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .game-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(20, 184, 166, 0.15);
+            border-color: var(--turquoise-light);
+        }
+
+        .icon-wrapper {
+            width: clamp(60px, 8vh, 80px);
+            height: clamp(60px, 8vh, 80px);
+            background: linear-gradient(135deg, var(--turquoise-pale), #bff6f0);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: clamp(8px, 1.5vh, 16px);
+        }
+
+        .icon-wrapper span {
+            font-size: clamp(28px, 4vh, 40px);
+        }
+
+        .game-card h2 {
+            font-size: clamp(16px, 2.2vh, 20px);
+            color: var(--turquoise);
+            margin-bottom: clamp(6px, 1vh, 10px);
+            font-weight: 600;
+        }
+
+        .game-card p {
+            color: var(--text-muted);
+            font-size: clamp(13px, 1.6vh, 15px);
+            line-height: 1.4;
+            margin-bottom: clamp(10px, 1.5vh, 16px);
+        }
+
+        .play-btn {
+            background: linear-gradient(90deg, var(--turquoise), var(--turquoise-light));
+            color: white;
+            border: none;
+            padding: clamp(8px, 1.2vh, 12px) clamp(20px, 2.5vw, 28px);
+            border-radius: 12px;
+            font-size: clamp(14px, 1.8vh, 16px);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(20, 184, 166, 0.2);
+        }
+
+        .play-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(20, 184, 166, 0.3);
+        }
+
+        .play-btn:active {
+            transform: scale(0.98);
+        }
+
+        @media (max-width: 900px) {
+            .games-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .games-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(5, 1fr);
+                gap: clamp(10px, 1.5vh, 15px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Play a Game, Mate!</h1>
+        <p>Engaging activities designed to keep the mind, body and spirit active</p>
+    </header>
+
+    <main class="games-grid">
+        <article class="game-card" onclick="launchGame('Memory & Logic')">
+            <div class="icon-wrapper">
+                <span>🧩</span>
+            </div>
+            <h2>Memory & Logic</h2>
+            <p>Quick puzzles to keep memory sharp</p>
+            <button class="play-btn">Play</button>
+        </article>
+
+        <article class="game-card" onclick="launchGame('Reading & Writing')">
+            <div class="icon-wrapper">
+                <span>📖</span>
+            </div>
+            <h2>Reading & Writing</h2>
+            <p>Daily prompts for vocabulary and expression</p>
+            <button class="play-btn">Play</button>
+        </article>
+
+        <article class="game-card" onclick="launchGame('Digital Steps')">
+            <div class="icon-wrapper">
+                <span>💻</span>
+            </div>
+            <h2>Digital Steps</h2>
+            <p>Build confidence with technology</p>
+            <button class="play-btn">Play</button>
+        </article>
+
+        <article class="game-card" onclick="launchGame('Physical Activities')">
+            <div class="icon-wrapper">
+                <span>🧘</span>
+            </div>
+            <h2>Physical Activities</h2>
+            <p>Gentle exercises connecting body and mind</p>
+            <button class="play-btn">Play</button>
+        </article>
+
+        <article class="game-card" onclick="launchGame('Storytelling')">
+            <div class="icon-wrapper">
+                <span>📚</span>
+            </div>
+            <h2>Storytelling</h2>
+            <p>Share memories and engage socially</p>
+            <button class="play-btn">Play</button>
+        </article>
+
+        <article class="game-card" onclick="launchGame('Music & Arts')">
+            <div class="icon-wrapper">
+                <span>🎨</span>
+            </div>
+            <h2>Music & Arts</h2>
+            <p>Creative activities for self-expression</p>
+            <button class="play-btn">Play</button>
+        </article>
+    </main>
+
+    <script>
+        function launchGame(gameName) {
+            alert('Launching ' + gameName + '...');
+        }
+    </script>
+</body>
+
+</html>

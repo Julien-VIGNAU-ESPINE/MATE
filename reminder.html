@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>MATE — Weekly Medication Agenda</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --turquoise: #14b8a6;
+            --turquoise-light: #2dd4bf;
+            --turquoise-bg: #e6f7f5;
+            --coral: #ff6b6b;
+            --violet: #a78bfa;
+            --white: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f0fdfc 0%, var(--turquoise-bg) 100%);
+            color: var(--text-dark);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--turquoise) 0%, var(--turquoise-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .week-info {
+            font-size: 18px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .calendar-container {
+            flex: 1;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(20, 184, 166, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        table {
+            width: 100%;
+            height: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+
+        thead {
+            background: linear-gradient(135deg, var(--turquoise) 0%, var(--turquoise-light) 100%);
+        }
+
+        th {
+            color: var(--white);
+            font-weight: 700;
+            font-size: 16px;
+            padding: 16px 8px;
+            border-right: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        th:last-child {
+            border-right: none;
+        }
+
+        th:first-child {
+            width: 80px;
+        }
+
+        tbody tr {
+            height: 33.33%;
+        }
+
+        td {
+            border: 2px solid var(--turquoise-bg);
+            padding: 12px 8px;
+            text-align: center;
+            vertical-align: middle;
+            background: var(--white);
+        }
+
+        td.time-cell {
+            background: linear-gradient(135deg, #f8fafc 0%, var(--turquoise-bg) 100%);
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--turquoise);
+        }
+
+        .med-entry {
+            background: var(--turquoise-bg);
+            border-radius: 12px;
+            padding: 8px 6px;
+            margin: 0 auto;
+            max-width: 140px;
+        }
+
+        .med-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .med-note {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .empty-cell {
+            opacity: 0.3;
+        }
+
+        /* Responsive adjustments */
+        @media (max-height: 700px) {
+            body {
+                padding: 12px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .week-info {
+                font-size: 16px;
+            }
+
+            header {
+                margin-bottom: 12px;
+            }
+
+            th {
+                padding: 12px 6px;
+                font-size: 14px;
+            }
+
+            td {
+                padding: 8px 4px;
+            }
+
+            .med-name {
+                font-size: 13px;
+            }
+
+            .med-note {
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>📋 Weekly Medication Agenda</h1>
+        <div class="week-info">Week: 30/09 — 06/10</div>
+    </header>
+
+    <div class="calendar-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                    <th>Sunday</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="time-cell">08:00</td>
+                    <td>
+                        <div class="med-entry">
+                            <div class="med-name">💊 Aspirin 75mg</div>
+                            <div class="med-note">After breakfast</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="med-entry">
+                            <div class="med-name">💊 Aspirin 75mg</div>
+                            <div class="med-note">After breakfast</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="med-entry">
+                            <div class="med-name">💊 Aspirin 75mg</div>
+                            <div class="med-note">After breakfast</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="med-entry">
+                            <div class="med-name">💊 Aspirin 75mg</div>
+                            <div class="med-note">After breakfast</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="med-entry">
+                            <div class="med-name">💊 Aspirin 75mg</div>
+                            <div class="med-note">After breakfast</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="med-entry">
+                            <div class="med-name">💊 Aspirin 75mg</div>
+                            <div class="med-note">After breakfast</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="med-entry">
+                            <div class="med-name">💊 Aspirin 75mg</div>
+                            <div class="med-note">After breakfast</div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="time-cell">12:00</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td>
+                        <div class="med-entry">
+                            <div class="med-name">☀️ Vitamin D</div>
+                            <div class="med-note">Twice a week</div>
+                        </div>
+                    </td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td>
+                        <div class="med-entry">
+                            <div class="med-name">☀️ Vitamin D</div>
+                            <div class="med-note">Twice a week</div>
+                        </div>
+                    </td>
+                    <td class="empty-cell">—</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">20:00</td>
+                    <td>
+                        <div class="med-entry">
+                            <div class="med-name">💊 Metformin 500mg</div>
+                            <div class="med-note">After dinner</div>
+                        </div>
+                    </td>
+                    <td class="empty-cell">—</td>
+                    <td>
+                        <div class="med-entry">
+                            <div class="med-name">💊 Metformin 500mg</div>
+                            <div class="med-note">After dinner</div>
+                        </div>
+                    </td>
+                    <td class="empty-cell">—</td>
+                    <td>
+                        <div class="med-entry">
+                            <div class="med-name">💊 Metformin 500mg</div>
+                            <div class="med-note">After dinner</div>
+                        </div>
+                    </td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

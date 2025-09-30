@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>MATE — Hub</title>
+    <meta name="description" content="MATE — Central hub to access all modules for elderly care solution">
+    <style>
+        :root {
+            --bg: #f3faf9;
+            --card: #ffffff;
+            --accent-blue: #0b84ff;
+            --accent-teal: #0ea5a4;
+            --accent-green: #22c55e;
+            --muted: #6b7280;
+            --radius: 14px;
+            --maxw: 980px;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+            background: linear-gradient(180deg, var(--bg), #eefdfa);
+            color: #0f172a;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.35;
+            padding: 28px 18px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--maxw)
+        }
+
+        header {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            margin-bottom: 18px
+        }
+
+        .logo {
+            width: 86px;
+            height: 86px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 22px rgba(11, 132, 255, 0.12);
+            color: white;
+            font-weight: 700;
+            font-size: 20px
+        }
+
+        h1 {
+            font-size: 26px;
+            margin: 0
+        }
+
+        p.lead {
+            margin: 4px 0 0;
+            color: var(--muted);
+            font-size: 15px
+        }
+
+        .top-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin: 22px 0
+        }
+
+        .search {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--card);
+            padding: 12px;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(2, 6, 23, 0.04)
+        }
+
+        .search input {
+            border: 0;
+            outline: 0;
+            font-size: 18px;
+            background: transparent;
+            width: 100%
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 0;
+            font-size: 16px;
+            cursor: pointer
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-teal));
+            color: white
+        }
+
+        .btn-ghost {
+            background: transparent;
+            border: 2px solid rgba(15, 23, 42, 0.06)
+        }
+
+        .btn-emergency {
+            background: var(--accent-green);
+            color: white;
+            font-weight: 700;
+            padding: 14px 18px;
+            border-radius: 14px
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px
+        }
+
+        .card {
+            background: var(--card);
+            padding: 18px;
+            border-radius: var(--radius);
+            box-shadow: 0 8px 20px rgba(2, 6, 23, 0.04);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-height: 120px
+        }
+
+        .card h3 {
+            margin: 0;
+            font-size: 18px
+        }
+
+        .card p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 14px
+        }
+
+        .card .kicker {
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .icon-wrap {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(14, 165, 164, 0.12), rgba(11, 132, 255, 0.12));
+        }
+
+        footer {
+            margin-top: 20px;
+            color: var(--muted);
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        a,
+        button {
+            font-family: inherit
+        }
+
+        a.card-link {
+            display: inline-block;
+            margin-top: auto
+        }
+
+        @media (max-width:540px) {
+            h1 {
+                font-size: 22px
+            }
+
+            .logo {
+                width: 68px;
+                height: 68px;
+                font-size: 18px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container" role="main">
+        <header>
+            <div class="logo" aria-hidden="true">MATE</div>
+            <div>
+                <h1>MATE — Central Hub</h1>
+                <p class="lead">Access the main modules designed for elderly people: simple, clear and helpful.</p>
+            </div>
+        </header>
+
+        <div class="top-actions" role="region" aria-label="Quick actions">
+            <div class="search" role="search">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M21 21l-4.35-4.35" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+                <label for="q" class="sr-only">Search</label>
+                <input id="q" type="search" placeholder="Search a module..." aria-label="Search">
+            </div>
+            <button class="btn btn-emergency" onclick="handleEmergency()" aria-label="Emergency call">Emergency</button>
+        </div>
+
+        <section aria-label="Main modules">
+            <div class="grid">
+                <article class="card" id="cognitive">
+                    <div class="kicker">
+                        <div class="icon-wrap" aria-hidden="true">🧠</div>
+                        <h3>Cognitive Report</h3>
+                    </div>
+                    <p>Track and review cognitive activity, memory exercises and assessments.</p>
+                    <a class="card-link" href="cognitivereport.html">Open →</a>
+                </article>
+
+                <article class="card" id="happiness">
+                    <div class="kicker">
+                        <div class="icon-wrap" aria-hidden="true">😊</div>
+                        <h3>Happiness Report</h3>
+                    </div>
+                    <p>Daily mood tracking and happiness overview to support wellbeing.</p>
+                    <a class="card-link" href="happynessreport.html">Open →</a>
+                </article>
+
+                <article class="card" id="main-ai">
+                    <div class="kicker">
+                        <div class="icon-wrap" aria-hidden="true">🤖</div>
+                        <h3>Main AI</h3>
+                    </div>
+                    <p>Your main AI assistant for guidance, conversations and daily support.</p>
+                    <a class="card-link" href="mainAI.html">Open →</a>
+                </article>
+
+                <article class="card" id="game">
+                    <div class="kicker">
+                        <div class="icon-wrap" aria-hidden="true">🎮</div>
+                        <h3>Play a Game</h3>
+                    </div>
+                    <p>Simple and fun games to keep the mind active and entertained.</p>
+                    <a class="card-link" href="games.html">Open →</a>
+                </article>
+
+                <article class="card" id="pill-reminder">
+                    <div class="kicker">
+                        <div class="icon-wrap" aria-hidden="true">💊</div>
+                        <h3>Pill Reminder</h3>
+                    </div>
+                    <p>Easy reminders for medication times and clear dosage information.</p>
+                    <a class="card-link" href="reminder.html">Open →</a>
+                </article>
+            </div>
+        </section>
+
+        <footer>
+            <div>© MATE — Solution for elderly people</div>
+            <div>
+                <button class="btn btn-ghost" onclick="openHelp()">Help</button>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        function handleEmergency() {
+            if (confirm('Call the emergency contact now?')) {
+                alert('Emergency call triggered (example)');
+            }
+        }
+        function openHelp() {
+            alert('Quick help:\n- Emergency call\n- Tutorials\n- Contact a family member');
+        }
+        document.querySelectorAll('.card-link').forEach(a => a.addEventListener('keydown', e => {
+            if (e.key === 'Enter') a.click();
+        }));
+    </script>
+</body>
+
+</html>

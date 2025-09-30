@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>MATE — Cognitive Assessment Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --turquoise: #14b8a6;
+            --turquoise-light: #2dd4bf;
+            --turquoise-bg: #f0fdfa;
+            --coral: #ff6b6b;
+            --purple: #a78bfa;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --bg-gradient: linear-gradient(135deg, #f0fdfa 0%, #ffffff 100%);
+            --card-shadow: 0 4px 24px rgba(20, 184, 166, 0.08);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            padding: 32px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .header-left h1 {
+            font-size: 32px;
+            background: linear-gradient(135deg, var(--turquoise), var(--turquoise-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .header-left .subtitle {
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .patient-info {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        .patient-info strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        /* Global Score Card */
+        .global-score {
+            background: linear-gradient(135deg, var(--turquoise), var(--turquoise-light));
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 32px;
+            color: white;
+            text-align: center;
+        }
+
+        .global-score h2 {
+            font-size: 18px;
+            font-weight: 500;
+            opacity: 0.95;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        .score-value {
+            font-size: 72px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .score-description {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--turquoise-bg);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        /* Domain Scores */
+        .domain-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .domain-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .domain-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .domain-name {
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--text-dark);
+        }
+
+        .domain-score {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--turquoise);
+        }
+
+        .domain-bar {
+            width: 100%;
+            height: 8px;
+            background: #f1f5f9;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .domain-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--turquoise), var(--turquoise-light));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .domain-bar-fill.low {
+            background: linear-gradient(90deg, var(--coral), #ff8787);
+        }
+
+        .domain-bar-fill.medium {
+            background: linear-gradient(90deg, #fbbf24, #fcd34d);
+        }
+
+        .domain-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+        }
+
+        .status {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .status.alert {
+            background: #fff5f5;
+            color: var(--coral);
+        }
+
+        .status.warning {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .status.ok {
+            background: #f0fdf4;
+            color: #16a34a;
+        }
+
+        .trend {
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        /* Test Results Table */
+        .test-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .test-table th {
+            text-align: left;
+            padding: 12px;
+            background: var(--turquoise-bg);
+            color: var(--turquoise);
+            font-weight: 600;
+            font-size: 14px;
+            border-radius: 10px;
+        }
+
+        .test-table td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 14px;
+        }
+
+        .test-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .test-score {
+            font-weight: 700;
+            color: var(--turquoise);
+        }
+
+        /* Observations */
+        .observations-list {
+            list-style: none;
+        }
+
+        .observations-list li {
+            padding: 14px 16px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--turquoise);
+            background: var(--turquoise-bg);
+            border-radius: 0 10px 10px 0;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .observations-list li.alert-item {
+            border-left-color: var(--coral);
+            background: #fff5f5;
+        }
+
+        .observations-list li.concern-item {
+            border-left-color: var(--purple);
+            background: #faf5ff;
+        }
+
+        /* Chart */
+        .chart-container {
+            padding: 20px 0;
+        }
+
+        .chart {
+            height: 200px;
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background: linear-gradient(180deg, var(--turquoise-light), var(--turquoise));
+            border-radius: 8px 8px 0 0;
+            min-height: 20px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .chart-bar:hover {
+            opacity: 0.8;
+            transform: translateY(-4px);
+        }
+
+        .chart-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Full Width Section */
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* Recommendations */
+        .recommendation-card {
+            background: linear-gradient(135deg, #faf5ff, #fff);
+            border: 2px solid var(--purple);
+            padding: 24px;
+            border-radius: 20px;
+            margin-top: 32px;
+        }
+
+        .recommendation-card h3 {
+            color: var(--purple);
+            margin-bottom: 16px;
+        }
+
+        .recommendation-card ul {
+            list-style: none;
+        }
+
+        .recommendation-card li {
+            padding: 10px 0;
+            padding-left: 28px;
+            position: relative;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .recommendation-card li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--purple);
+            font-weight: 700;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .card,
+            .header,
+            .global-score {
+                box-shadow: none;
+                page-break-inside: avoid;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                text-align: center;
+            }
+
+            .header-right {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <h1>COGNITIVE ASSESSMENT REPORT</h1>
+                <div class="subtitle">Medical Professional Dashboard</div>
+            </div>
+            <div class="header-right">
+                <div class="patient-info">
+                    <div><strong>Report Date:</strong> September 27, 2025</div>
+                    <div><strong>Assessment Period:</strong> July - September 2025</div>
+                    <div><strong>Evaluator:</strong> MATE Cognitive Platform</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Global Score -->
+        <div class="global-score">
+            <h2>GLOBAL COGNITIVE INDEX</h2>
+            <div class="score-value">72%</div>
+            <div class="score-description">Composite score based on multi-domain assessment and longitudinal tracking
+            </div>
+        </div>
+
+        <!-- Grid Layout -->
+        <div class="grid">
+            <!-- Domain Scores -->
+            <div class="card full-width">
+                <h3>
+                    <div class="card-icon">🧠</div>
+                    Cognitive Domain Analysis
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+                    <div class="domain-item">
+                        <div class="domain-header">
+                            <span class="domain-name">Memory</span>
+                            <span class="domain-score">65%</span>
+                        </div>
+                        <div class="domain-bar">
+                            <div class="domain-bar-fill low" style="width: 65%"></div>
+                        </div>
+                        <div class="domain-meta">
+                            <span class="status alert">Below Average</span>
+                            <span class="trend">→ Stable</span>
+                        </div>
+                    </div>
+
+                    <div class="domain-item">
+                        <div class="domain-header">
+                            <span class="domain-name">Attention</span>
+                            <span class="domain-score">78%</span>
+                        </div>
+                        <div class="domain-bar">
+                            <div class="domain-bar-fill" style="width: 78%"></div>
+                        </div>
+                        <div class="domain-meta">
+                            <span class="status ok">Normal Range</span>
+                            <span class="trend">↗ Improving</span>
+                        </div>
+                    </div>
+
+                    <div class="domain-item">
+                        <div class="domain-header">
+                            <span class="domain-name">Language</span>
+                            <span class="domain-score">70%</span>
+                        </div>
+                        <div class="domain-bar">
+                            <div class="domain-bar-fill medium" style="width: 70%"></div>
+                        </div>
+                        <div class="domain-meta">
+                            <span class="status warning">Adequate</span>
+                            <span class="trend">→ Stable</span>
+                        </div>
+                    </div>
+
+                    <div class="domain-item">
+                        <div class="domain-header">
+                            <span class="domain-name">Executive Function</span>
+                            <span class="domain-score">60%</span>
+                        </div>
+                        <div class="domain-bar">
+                            <div class="domain-bar-fill low" style="width: 60%"></div>
+                        </div>
+                        <div class="domain-meta">
+                            <span class="status alert">Impaired</span>
+                            <span class="trend">↘ Declining</span>
+                        </div>
+                    </div>
+
+                    <div class="domain-item">
+                        <div class="domain-header">
+                            <span class="domain-name">Processing Speed</span>
+                            <span class="domain-score">85%</span>
+                        </div>
+                        <div class="domain-bar">
+                            <div class="domain-bar-fill" style="width: 85%"></div>
+                        </div>
+                        <div class="domain-meta">
+                            <span class="status ok">Above Average</span>
+                            <span class="trend">↗ Improving</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Test Results -->
+            <div class="card" style="grid-column: 1 / -1;">
+                <h3>
+                    <div class="card-icon">📋</div>
+                    Standardized Assessment Results
+                </h3>
+                <table class="test-table">
+                    <thead>
+                        <tr>
+                            <th>Assessment Tool</th>
+                            <th>Administration Date</th>
+                            <th>Score</th>
+                            <th>Clinical Interpretation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Mini-Mental State Exam (MMSE)</strong></td>
+                            <td>September 20, 2025</td>
+                            <td class="test-score">26/30</td>
+                            <td>Borderline normal cognition. Mild impairment suggested.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trail Making Test (Part A)</strong></td>
+                            <td>September 10, 2025</td>
+                            <td class="test-score">42 sec</td>
+                            <td>Within normal range for age group. Good psychomotor speed.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Digit Span Test</strong></td>
+                            <td>September 5, 2025</td>
+                            <td class="test-score">F:7 / B:4</td>
+                            <td>Forward span normal. Backward span indicates working memory difficulties.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Clinical Observations -->
+            <div class="card">
+                <h3>
+                    <div class="card-icon">⚠️</div>
+                    Clinical Observations
+                </h3>
+                <ul class="observations-list">
+                    <li class="alert-item">Memory recall demonstrates decline compared to baseline assessment from
+                        previous month.</li>
+                    <li class="alert-item">Executive function showing weakness, particularly in task planning and
+                        organization.</li>
+                    <li>Processing speed remains strong, indicating preserved psychomotor response capabilities.</li>
+                    <li class="concern-item">Patient reports increased difficulty with daily instrumental activities
+                        requiring multi-step planning.</li>
+                </ul>
+            </div>
+
+            <!-- Historical Trend -->
+            <div class="card">
+                <h3>
+                    <div class="card-icon">📈</div>
+                    Longitudinal Cognitive Trajectory
+                </h3>
+                <div class="chart-container">
+                    <div class="chart">
+                        <div class="chart-bar" style="height: 65%"></div>
+                        <div class="chart-bar" style="height: 70%"></div>
+                        <div class="chart-bar" style="height: 60%"></div>
+                        <div class="chart-bar" style="height: 75%"></div>
+                        <div class="chart-bar" style="height: 72%"></div>
+                        <div class="chart-bar" style="height: 74%"></div>
+                        <div class="chart-bar" style="height: 72%"></div>
+                    </div>
+                    <div class="chart-labels">
+                        <span>Jul 23</span>
+                        <span>Jul 7</span>
+                        <span>Aug 5</span>
+                        <span>Sep 1</span>
+                        <span>Sep 8</span>
+                        <span>Sep 12</span>
+                        <span>Sep 17</span>
+                    </div>
+                </div>
+                <p style="color: var(--text-muted); font-size: 14px; margin-top: 12px;">
+                    <strong>Trend Analysis:</strong> Overall cognitive performance shows fluctuation within 60-75%
+                    range. Notable dip in early August followed by partial recovery. Current plateau suggests need for
+                    intervention review.
+                </p>
+            </div>
+        </div>
+
+        <!-- Clinical Recommendations -->
+        <div class="recommendation-card">
+            <h3>
+                <div class="card-icon" style="background: #faf5ff;">💡</div>
+                Clinical Recommendations
+            </h3>
+            <ul>
+                <li>Consider comprehensive neuropsychological evaluation to further characterize memory and executive
+                    function deficits</li>
+                <li>Recommend neuroimaging (MRI) to rule out structural abnormalities or vascular changes</li>
+                <li>Initiate targeted cognitive rehabilitation focusing on executive function and memory strategies</li>
+                <li>Review medication list for potential cognitive side effects (anticholinergics, benzodiazepines)</li>
+                <li>Occupational therapy assessment for instrumental activities of daily living (IADLs) support</li>
+                <li>Follow-up assessment recommended in 6-8 weeks to monitor progression</li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
