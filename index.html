@@ -41,8 +41,8 @@
         }
 
         .menu button {
-            padding: 14px 20px;
-            font-size: 1.1rem;
+            padding: 18px 26px;
+            font-size: 1.3rem;
             font-weight: bold;
             border: none;
             border-radius: 20px;
@@ -75,7 +75,7 @@
             transform: translateY(-2px);
         }
 
-        /* Petit bouton vidéo en bas à gauche */
+        /* Video control button */
         .video-control {
             position: absolute;
             bottom: 20px;
@@ -84,9 +84,9 @@
             color: white;
             border: none;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 1.2rem;
+            width: 50px;
+            height: 50px;
+            font-size: 1.4rem;
             cursor: pointer;
             transition: background 0.3s ease;
         }
@@ -95,34 +95,26 @@
             background: rgba(0, 0, 0, 0.7);
         }
 
-        /* Reminder box in top-left */
+        /* Reminder boxes */
         .reminder-box {
             position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(255, 255, 255, 0.85);
-            padding: 20px 25px;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            max-width: 300px;
-        }
-
-        .reminder-box h3 {
-            margin: 0 0 12px;
-            font-size: 1.3rem;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px 35px;
+            border-radius: 20px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+            font-size: 1.5rem;
             color: #333;
+            min-width: 350px;
+            max-width: 400px;
+            white-space: normal;
+            word-wrap: break-word;
         }
 
-        .reminder-box ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .reminder-box li {
-            margin-bottom: 10px;
-            font-size: 1.05rem;
-            color: #444;
+        .reminder-box .time {
+            display: block;
+            margin-top: 12px;
+            font-size: 1.2rem;
+            color: #666;
         }
     </style>
 </head>
@@ -134,14 +126,26 @@
         Your browser does not support the video.
     </video>
 
-    <!-- Reminder box -->
-    <div class="reminder-box">
-        <h3>📅 Reminders</h3>
-        <ul>
-            <li>📞 Family call at 3 PM</li>
-            <li>💊 Take pills at 6 PM</li>
-            <li>🚶‍♂️ Short walk after dinner</li>
-        </ul>
+    <!-- Reminder boxes with emojis -->
+    <div class="reminder-box" style="top: 30px; left: 40px;">🎮 Time to play
+        <span class="time">10:30</span>
+    </div>
+
+    <div class="reminder-box" style="top: 45%; left: 50px;">💊 1 pill of Lisinopril
+        <span class="time">12:30</span>
+    </div>
+
+    <div class="reminder-box" style="bottom: 50px; left: 70px;">🧑‍⚕️ Physiotherapy, pick up a 16:30
+        <span class="time">17:00</span>
+    </div>
+
+    <div class="reminder-box" style="top: 60px; right: 60px;">📹 Planned videocall with Susan
+        <span class="time">18:30</span>
+    </div>
+
+    <div class="reminder-box" style="top: 50%; right: 50px; transform: translateY(-50%);">📞 Hi Dad, I'll see you at
+        dinner tomorrow!
+        <span class="time">19:00</span>
     </div>
 
     <!-- Video control button -->
