@@ -26,7 +26,7 @@
             z-index: -1;
         }
 
-        /* Barre de menu en bas */
+        /* Menu principal en bas centré */
         .menu {
             position: absolute;
             bottom: 20px;
@@ -50,7 +50,6 @@
             transition: all 0.3s ease;
         }
 
-        /* Couleurs adaptées à chaque bouton */
         .cognitive {
             background: #14b8a6;
             color: white;
@@ -75,23 +74,57 @@
             opacity: 0.85;
             transform: translateY(-2px);
         }
+
+        /* Petit bouton vidéo en bas à gauche */
+        .video-control {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .video-control:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
     </style>
 </head>
 
 <body>
     <!-- Vidéo en arrière-plan -->
-    <video autoplay muted playsinline loop>
+    <video id="bgVideo" autoplay muted playsinline loop>
         <source src="ia_video.mp4" type="video/mp4">
         Votre navigateur ne supporte pas la vidéo.
     </video>
 
-    <!-- Menu discret en bas -->
+    <!-- Bouton discret pour contrôler la vidéo -->
+    <button class="video-control" onclick="toggleVideo()">⏯</button>
+
+    <!-- Menu principal -->
     <div class="menu">
         <button class="cognitive" onclick="location.href='cognitivereport.html'">🧠 Cognitive</button>
         <button class="happiness" onclick="location.href='happynessreport.html'">😊 Happiness</button>
         <button class="pills" onclick="location.href='reminder.html'">💊 Pills</button>
         <button class="games" onclick="location.href='games.html'">🎮 Games</button>
     </div>
+
+    <script>
+        function toggleVideo() {
+            const video = document.getElementById("bgVideo");
+            if (video.paused) {
+                video.play();
+            } else {
+                video.pause();
+            }
+        }
+    </script>
 </body>
 
 </html>
