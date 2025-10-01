@@ -74,6 +74,11 @@
             transform: translateY(-2px);
         }
 
+        .menu button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
         .video-control {
             position: absolute;
             bottom: 20px;
@@ -139,6 +144,22 @@
         Your browser does not support the audio element.
     </audio>
 
+    <!-- Button sounds -->
+    <audio id="cognitiveSound">
+        <source src="Sure doctor Let s se.m4a" type="audio/mpeg">
+    </audio>
+    <audio id="wellbeingSound">
+        <source src="Let s see how Paul i.m4a" type="audio/mpeg">
+    </audio>
+    <audio id="pillSound">
+        <source src="Of course Paul Here .m4a" type="audio/mpeg">
+    </audio>
+    <audio id="gamesSound">
+        <source src="You want to play Sur.m4a" type="audio/mpeg">
+    </audio>
+
+
+
     <!-- Left-aligned reminder boxes -->
     <div class="reminders-left">
         <div class="reminder-box">🎮 Time to play
@@ -164,15 +185,25 @@
 
     <!-- Main menu -->
     <div class="menu">
-        <button class="cognitive" onclick="location.href='cognitivereport.html'">🧠 Cognitive</button>
-        <button class="wellbeing" onclick="location.href='happynessreport.html'">😊 Wellbeing</button>
-        <button class="pills" onclick="location.href='reminder.html'">💊 Pills</button>
-        <button class="games" onclick="location.href='games.html'">🎮 Games</button>
+        <button class="cognitive" id="cognitiveBtn" onclick="handleButtonClick('cognitive', 'cognitivereport.html')">🧠
+            Cognitive</button>
+        <button class="wellbeing" id="wellbeingBtn" onclick="handleButtonClick('wellbeing', 'happynessreport.html')">😊
+            Wellbeing</button>
+        <button class="pills" id="pillsBtn" onclick="handleButtonClick('pills', 'reminder.html')">💊 Pills</button>
+        <button class="games" id="gamesBtn" onclick="handleButtonClick('games', 'games.html')">🎮 Games</button>
     </div>
 
     <script>
         const video = document.getElementById("bgVideo");
         const music = document.getElementById("bgMusic");
+        const cognitiveSound = document.getElementById("cognitiveSound");
+        const wellbeingSound = document.getElementById("wellbeingSound");
+        const pillSound = document.getElementById("pillSound");
+        const gamesSound = document.getElementById("gamesSound");
+        const cognitiveBtn = document.getElementById("cognitiveBtn");
+        const wellbeingBtn = document.getElementById("wellbeingBtn");
+        const pillsBtn = document.getElementById("pillsBtn");
+        const gamesBtn = document.getElementById("gamesBtn");
 
         function toggleVideo() {
             if (video.paused) {
@@ -188,6 +219,42 @@
             } else {
                 music.pause();
             }
+        }
+
+        function handleButtonClick(buttonType, targetPage) {
+            // Sélectionner le son et le bouton appropriés
+            let sound;
+            let button;
+
+            switch (buttonType) {
+                case 'cognitive':
+                    sound = cognitiveSound;
+                    button = cognitiveBtn;
+                    break;
+                case 'wellbeing':
+                    sound = wellbeingSound;
+                    button = wellbeingBtn;
+                    break;
+                case 'pills':
+                    sound = pillSound;
+                    button = pillsBtn;
+                    break;
+                case 'games':
+                    sound = gamesSound;
+                    button = gamesBtn;
+                    break;
+            }
+
+            // Jouer le son
+            sound.play();
+
+            // Désactiver le bouton
+            button.disabled = true;
+
+            // Attendre 5 secondes puis rediriger
+            setTimeout(() => {
+                location.href = targetPage;
+            }, 5000);
         }
 
         // Try to play music automatically (some browsers may block without user interaction)
